@@ -1,0 +1,12 @@
+name: process-composition
+version: 0.1.0.0
+synopsis: Mechanised library for linear resources and process compositions
+github: pilif0/codegen-ProcessComposition/haskell
+license: BSD-3-Clause
+author: Filip Smola
+category: Library, Formal Methods
+
+library:
+  source-dirs: src
+  dependencies:
+    - base >= 4.7 && < 5

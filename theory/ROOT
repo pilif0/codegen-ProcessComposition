@@ -1,0 +1,5 @@
+session "ProcessComposition_Code" = "ProcessComposition" +
+  sessions
+    "HOL-Library"
+  theories
+    CodeExport

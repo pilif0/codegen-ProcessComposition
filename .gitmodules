@@ -1,0 +1,3 @@
+[submodule "isa-ProcessComposition"]
+	path = isa-ProcessComposition
+	url = https://github.com/pilif0/isa-ProcessComposition.git
