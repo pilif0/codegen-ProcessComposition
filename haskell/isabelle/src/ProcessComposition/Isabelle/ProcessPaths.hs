@@ -2,7 +2,7 @@
 
 module
   ProcessComposition.Isabelle.ProcessPaths(Process_inner(..), subprocessStep,
-    subprocess)
+    subprocess, equal_process_inner)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -181,5 +181,56 @@ subprocess p x =
   ProcessComposition.Isabelle.List.foldl
     (\ a b -> ProcessComposition.Isabelle.Option.bind a (subprocessStep b))
     (Just x) p;
+
+equal_process_inner :: Process_inner -> Process_inner -> Bool;
+equal_process_inner OptR Rep = False;
+equal_process_inner Rep OptR = False;
+equal_process_inner OptL Rep = False;
+equal_process_inner Rep OptL = False;
+equal_process_inner OptL OptR = False;
+equal_process_inner OptR OptL = False;
+equal_process_inner ParR Rep = False;
+equal_process_inner Rep ParR = False;
+equal_process_inner ParR OptR = False;
+equal_process_inner OptR ParR = False;
+equal_process_inner ParR OptL = False;
+equal_process_inner OptL ParR = False;
+equal_process_inner ParL Rep = False;
+equal_process_inner Rep ParL = False;
+equal_process_inner ParL OptR = False;
+equal_process_inner OptR ParL = False;
+equal_process_inner ParL OptL = False;
+equal_process_inner OptL ParL = False;
+equal_process_inner ParL ParR = False;
+equal_process_inner ParR ParL = False;
+equal_process_inner SeqR Rep = False;
+equal_process_inner Rep SeqR = False;
+equal_process_inner SeqR OptR = False;
+equal_process_inner OptR SeqR = False;
+equal_process_inner SeqR OptL = False;
+equal_process_inner OptL SeqR = False;
+equal_process_inner SeqR ParR = False;
+equal_process_inner ParR SeqR = False;
+equal_process_inner SeqR ParL = False;
+equal_process_inner ParL SeqR = False;
+equal_process_inner SeqL Rep = False;
+equal_process_inner Rep SeqL = False;
+equal_process_inner SeqL OptR = False;
+equal_process_inner OptR SeqL = False;
+equal_process_inner SeqL OptL = False;
+equal_process_inner OptL SeqL = False;
+equal_process_inner SeqL ParR = False;
+equal_process_inner ParR SeqL = False;
+equal_process_inner SeqL ParL = False;
+equal_process_inner ParL SeqL = False;
+equal_process_inner SeqL SeqR = False;
+equal_process_inner SeqR SeqL = False;
+equal_process_inner Rep Rep = True;
+equal_process_inner OptR OptR = True;
+equal_process_inner OptL OptL = True;
+equal_process_inner ParR ParR = True;
+equal_process_inner ParL ParL = True;
+equal_process_inner SeqR SeqR = True;
+equal_process_inner SeqL SeqL = True;
 
 }

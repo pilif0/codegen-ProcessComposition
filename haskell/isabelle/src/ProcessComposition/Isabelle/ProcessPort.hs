@@ -1,6 +1,8 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.ProcessPort(Process_side(..), parallelPorts)
+module
+  ProcessComposition.Isabelle.ProcessPort(Process_side(..), parallelPorts,
+   equal_process_side)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -24,5 +26,11 @@ parallelPorts ::
 parallelPorts n s a =
   ProcessComposition.Isabelle.Port.listPorts n s
     (ProcessComposition.Isabelle.Resource.parallel_parts a);
+
+equal_process_side :: Process_side -> Process_side -> Bool;
+equal_process_side In Out = False;
+equal_process_side Out In = False;
+equal_process_side Out Out = True;
+equal_process_side In In = True;
 
 }

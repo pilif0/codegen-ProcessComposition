@@ -19,7 +19,7 @@ upt ::
       [ProcessComposition.Isabelle.Arith.Nat];
 upt i j =
   (if ProcessComposition.Isabelle.Arith.less_nat i j
-    then i : upt (ProcessComposition.Isabelle.Arith.Suc i) j else []);
+    then i : upt (ProcessComposition.Isabelle.Arith.suc i) j else []);
 
 foldl :: forall a b. (a -> b -> a) -> a -> [b] -> a;
 foldl f a [] = a;
@@ -37,10 +37,10 @@ gen_length ::
   forall a.
     ProcessComposition.Isabelle.Arith.Nat ->
       [a] -> ProcessComposition.Isabelle.Arith.Nat;
-gen_length n (x : xs) = gen_length (ProcessComposition.Isabelle.Arith.Suc n) xs;
+gen_length n (x : xs) = gen_length (ProcessComposition.Isabelle.Arith.suc n) xs;
 gen_length n [] = n;
 
 size_list :: forall a. [a] -> ProcessComposition.Isabelle.Arith.Nat;
-size_list = gen_length ProcessComposition.Isabelle.Arith.Zero_nat;
+size_list = gen_length ProcessComposition.Isabelle.Arith.zero_nat;
 
 }

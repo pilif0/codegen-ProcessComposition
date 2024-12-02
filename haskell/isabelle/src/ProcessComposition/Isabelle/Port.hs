@@ -3,7 +3,8 @@
 module
   ProcessComposition.Isabelle.Port(Port(..), Qualified_port(..), listPorts,
                                     side, index, label, renameQPort,
-                                    qualifyQPort, name, port)
+                                    qualifyQPort, name, port, equal_port,
+                                    equal_qualified_port)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -52,5 +53,14 @@ name (QPort x1 x2) = x2;
 
 port :: forall a b c. Qualified_port a b c -> Port a b;
 port (QPort x1 x2) = x1;
+
+equal_port :: forall a b. (Eq a, Eq b) => Port a b -> Port a b -> Bool;
+equal_port (Port x1 x2 x3) (Port y1 y2 y3) =
+  x1 == y1 && ProcessComposition.Isabelle.Arith.equal_nat x2 y2 && x3 == y3;
+
+equal_qualified_port ::
+  forall a b c.
+    (Eq a, Eq b, Eq c) => Qualified_port a b c -> Qualified_port a b c -> Bool;
+equal_qualified_port (QPort x1 x2) (QPort y1 y2) = equal_port x1 y1 && x2 == y2;
 
 }

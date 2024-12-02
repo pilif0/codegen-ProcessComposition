@@ -1,8 +1,9 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
 module
-  ProcessComposition.Isabelle.Arith(Nat(..), one_nat, less_nat, less_eq_nat,
-                                     plus_nat)
+  ProcessComposition.Isabelle.Arith(Nat(..), Num(..), integer_of_nat, plus_nat,
+                                     one_nat, suc, less_nat, zero_nat,
+                                     equal_nat)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -12,21 +13,29 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   String, Bool(True, False), Maybe(Nothing, Just));
 import qualified Prelude;
 
-data Nat = Zero_nat | Suc Nat deriving (Prelude.Read, Prelude.Show);
+newtype Nat = Nat Integer deriving (Prelude.Read, Prelude.Show);
 
-one_nat :: Nat;
-one_nat = Suc Zero_nat;
+data Num = One | Bit0 Num | Bit1 Num deriving (Prelude.Read, Prelude.Show);
 
-less_nat :: Nat -> Nat -> Bool;
-less_nat m (Suc n) = less_eq_nat m n;
-less_nat n Zero_nat = False;
-
-less_eq_nat :: Nat -> Nat -> Bool;
-less_eq_nat (Suc m) n = less_nat m n;
-less_eq_nat Zero_nat n = True;
+integer_of_nat :: Nat -> Integer;
+integer_of_nat (Nat x) = x;
 
 plus_nat :: Nat -> Nat -> Nat;
-plus_nat (Suc m) n = plus_nat m (Suc n);
-plus_nat Zero_nat n = n;
+plus_nat m n = Nat (integer_of_nat m + integer_of_nat n);
+
+one_nat :: Nat;
+one_nat = Nat (1 :: Integer);
+
+suc :: Nat -> Nat;
+suc n = plus_nat n one_nat;
+
+less_nat :: Nat -> Nat -> Bool;
+less_nat m n = integer_of_nat m < integer_of_nat n;
+
+zero_nat :: Nat;
+zero_nat = Nat (0 :: Integer);
+
+equal_nat :: Nat -> Nat -> Bool;
+equal_nat m n = integer_of_nat m == integer_of_nat n;
 
 }
