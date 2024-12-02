@@ -28,8 +28,12 @@ The intention is for the code to be used in other Stack projects by adding it to
 - github: pilif0/codegen-ProcessComposition
   commit: COMMIT
   subdirs:
-  - haskell
+  - haskell/isabelle
 ```
+
+A local version can be loaded by using a relative path.
+This approach is discouraged in commits of the dependent project, as it loses reproducibility.
+However, it can be useful for testing changes to this repository.
 
 See also Stack [documentation](https://docs.haskellstack.org/en/stable/topics/package_location/#git-and-mercurial-repositories) on specifying package location as a git repository.
 
