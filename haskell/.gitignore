@@ -1,5 +1,5 @@
 # Haskell Stack
 .stack-work/
 
-# Cabal files from hpack
-*.cabal
+# Cabal files from hpack should be checked in
+# (https://docs.haskellstack.org/en/stable/topics/stack_yaml_vs_cabal_package_file/#should-i-check-in-automatically-generated-cabal-files)

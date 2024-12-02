@@ -1,0 +1,47 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           process-composition
+version:        0.1.0.0
+synopsis:       Mechanised library for linear resources and process compositions
+category:       Library, Formal Methods
+homepage:       https://github.com/pilif0/codegen-ProcessComposition#readme
+bug-reports:    https://github.com/pilif0/codegen-ProcessComposition/issues
+author:         Filip Smola
+maintainer:     Filip Smola
+license:        BSD-3-Clause
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/pilif0/codegen-ProcessComposition
+  subdir: haskell
+
+library
+  exposed-modules:
+      ProcessComposition.Isabelle.Arith
+      ProcessComposition.Isabelle.List
+      ProcessComposition.Isabelle.Option
+      ProcessComposition.Isabelle.Port
+      ProcessComposition.Isabelle.Process
+      ProcessComposition.Isabelle.ProcessPaths
+      ProcessComposition.Isabelle.ProcessPort
+      ProcessComposition.Isabelle.Product_Type
+      ProcessComposition.Isabelle.ResNormalForm
+      ProcessComposition.Isabelle.ResNormDirect
+      ProcessComposition.Isabelle.ResNormRewrite
+      ProcessComposition.Isabelle.Resource
+      ProcessComposition.Isabelle.ResTerm
+      ProcessComposition.Isabelle.Set
+  other-modules:
+      Paths_process_composition
+  autogen-modules:
+      Paths_process_composition
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
