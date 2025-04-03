@@ -35,6 +35,9 @@ A local version can be loaded by using a relative path.
 This approach is discouraged in commits of the dependent project, as it loses reproducibility.
 However, it can be useful for testing changes to this repository.
 
+Finally, this repository can also be included as a submodule of another.
+Then it can be included in `extra-deps` simply by listing the path to that submodule.
+
 See also Stack [documentation](https://docs.haskellstack.org/en/stable/topics/package_location/#git-and-mercurial-repositories) on specifying package location as a git repository.
 
 (Once a stable form of this library is used wider, publishing to Hackage could be considered.)
