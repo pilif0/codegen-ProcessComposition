@@ -3,7 +3,7 @@
 module
   ProcessComposition.Isabelle.Factorio.Item(Item(..), Flow(..), Flow_meta(..),
      move, unit, merge, split, counit, splits, flowLoc, flowItem, flowRate,
-     itemLabel)
+     itemLabel, equal_item, equal_flow)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -130,5 +130,13 @@ flowRate (Flow x1 x2 x3) = x2;
 
 itemLabel :: Item -> String;
 itemLabel (Item x) = x;
+
+equal_item :: Item -> Item -> Bool;
+equal_item (Item x) (Item ya) = x == ya;
+
+equal_flow :: Flow -> Flow -> Bool;
+equal_flow (Flow x1 x2 x3) (Flow y1 y2 y3) =
+  equal_item x1 y1 &&
+    ProcessComposition.Isabelle.Rat.equal_rat x2 y2 && x3 == y3;
 
 }

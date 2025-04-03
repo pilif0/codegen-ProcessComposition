@@ -3,7 +3,7 @@
 module
   ProcessComposition.Isabelle.Rat(Rat(..), one_rat, quotient_of, normalize,
                                    plus_rat, zero_rat, times_rat, of_int,
-                                   divide_rat)
+                                   equal_rat, divide_rat)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -149,6 +149,9 @@ instance ProcessComposition.Isabelle.Arith.Semiring_1 Rat where {
 
 of_int :: ProcessComposition.Isabelle.Arith.Int -> Rat;
 of_int a = Frct (a, ProcessComposition.Isabelle.Arith.one_int);
+
+equal_rat :: Rat -> Rat -> Bool;
+equal_rat a b = quotient_of a == quotient_of b;
 
 divide_rat :: Rat -> Rat -> Rat;
 divide_rat p q =

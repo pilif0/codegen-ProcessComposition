@@ -3,7 +3,7 @@
 module
   ProcessComposition.Isabelle.Factorio.Machine(Machine(..), Mach_block(..),
         mblockIn, mblockOut, machineConsu, machineDrain, machineLabel,
-        machineSpeed, mblockMach, mblockCount)
+        machineSpeed, mblockMach, mblockCount, equal_machine, equal_mach_block)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -49,5 +49,17 @@ mblockMach (MachBlock x1 x2 x3 x4) = x1;
 
 mblockCount :: Mach_block -> ProcessComposition.Isabelle.Arith.Nat;
 mblockCount (MachBlock x1 x2 x3 x4) = x2;
+
+equal_machine :: Machine -> Machine -> Bool;
+equal_machine (Machine x1 x2 x3 x4) (Machine y1 y2 y3 y4) =
+  x1 == y1 &&
+    ProcessComposition.Isabelle.Rat.equal_rat x2 y2 &&
+      ProcessComposition.Isabelle.Arith.equal_nat x3 y3 &&
+        ProcessComposition.Isabelle.Arith.equal_nat x4 y4;
+
+equal_mach_block :: Mach_block -> Mach_block -> Bool;
+equal_mach_block (MachBlock x1 x2 x3 x4) (MachBlock y1 y2 y3 y4) =
+  equal_machine x1 y1 &&
+    ProcessComposition.Isabelle.Arith.equal_nat x2 y2 && x3 == y3 && x4 == y4;
 
 }

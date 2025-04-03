@@ -1,7 +1,8 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
 module
-  ProcessComposition.Isabelle.Arith(Nat(..), integer_of_nat, plus_nat, Plus(..),
+  ProcessComposition.Isabelle.Arith(Int(..), integer_of_int, equal_int, Nat(..),
+                                     integer_of_nat, plus_nat, Plus(..),
                                      zero_nat, Zero(..), Semigroup_add(..),
                                      Monoid_add(..), One(..), Numeral(..),
                                      Times(..), Power(..), Semigroup_mult(..),
@@ -9,13 +10,13 @@ module
                                      Mult_zero(..), Comm_monoid_add(..),
                                      Semiring_0(..), Monoid_mult(..),
                                      Semiring_numeral(..), Zero_neq_one(..),
-                                     Semiring_1(..), Int(..), Num(..), one_nat,
-                                     suc, minus_nat, equal_nat, power, one_int,
-                                     integer_of_int, less_int, less_nat,
-                                     numeral, nat_of_integer, divmod_nat,
-                                     plus_int, zero_int, divmod_integer, of_nat,
-                                     equal_int, times_int, times_nat,
-                                     uminus_int, divide_integer, divide_int)
+                                     Semiring_1(..), Num(..), one_nat, suc,
+                                     minus_nat, equal_nat, power, one_int,
+                                     less_int, less_nat, numeral,
+                                     nat_of_integer, divmod_nat, plus_int,
+                                     zero_int, divmod_integer, of_nat,
+                                     times_int, times_nat, uminus_int,
+                                     divide_integer, divide_int)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -29,6 +30,18 @@ import qualified Data.Bits;
 import qualified ProcessComposition.Isabelle.Product_Type;
 import qualified ProcessComposition.Isabelle.HOL;
 import qualified ProcessComposition.Isabelle.Orderings;
+
+newtype Int = Int_of_integer Integer deriving (Prelude.Read, Prelude.Show);
+
+integer_of_int :: Int -> Integer;
+integer_of_int (Int_of_integer k) = k;
+
+equal_int :: Int -> Int -> Bool;
+equal_int k l = integer_of_int k == integer_of_int l;
+
+instance Eq Int where {
+  a == b = equal_int a b;
+};
 
 newtype Nat = Nat Integer deriving (Prelude.Read, Prelude.Show);
 
@@ -118,8 +131,6 @@ class (One a, Zero a) => Zero_neq_one a where {
 class (Semiring_numeral a, Semiring_0 a, Zero_neq_one a) => Semiring_1 a where {
 };
 
-newtype Int = Int_of_integer Integer deriving (Prelude.Read, Prelude.Show);
-
 data Num = One | Bit0 Num | Bit1 Num deriving (Prelude.Read, Prelude.Show);
 
 one_nat :: Nat;
@@ -143,9 +154,6 @@ power a n =
 
 one_int :: Int;
 one_int = Int_of_integer (1 :: Integer);
-
-integer_of_int :: Int -> Integer;
-integer_of_int (Int_of_integer k) = k;
 
 less_int :: Int -> Int -> Bool;
 less_int k l = integer_of_int k < integer_of_int l;
@@ -213,9 +221,6 @@ of_nat n =
                        ma = times (numeral (Bit0 One)) (of_nat m);
                      } in (if equal_nat q zero_nat then ma else plus ma one);
          }));
-
-equal_int :: Int -> Int -> Bool;
-equal_int k l = integer_of_int k == integer_of_int l;
 
 times_int :: Int -> Int -> Int;
 times_int k l = Int_of_integer (integer_of_int k * integer_of_int l);

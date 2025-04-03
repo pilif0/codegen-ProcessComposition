@@ -52,8 +52,10 @@ export_code open
   (* Factorio example *)
   machineLabel machineSpeed machineDrain machineConsu
   mblockMach mblockCount mblockIn mblockOut
+  "HOL.equal :: mach_block \<Rightarrow> mach_block \<Rightarrow> bool"
   itemLabel
   flowItem flowRate flowLoc
+  "HOL.equal :: flow \<Rightarrow> flow \<Rightarrow> bool"
   merge unit split counit move perform
   makeWagon fourGears electricity
   in Haskell file_prefix "haskell/isabelle/src" (root: ProcessComposition.Isabelle string_classes)
