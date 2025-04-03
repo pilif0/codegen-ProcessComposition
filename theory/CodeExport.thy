@@ -3,12 +3,25 @@ theory CodeExport
     ProcessComposition.Process
     ProcessComposition.ProcessPort
     "HOL-Library.Code_Target_Numeral"
+    ProcessComposition_Factorio.CraftWagon
+    ProcessComposition_Factorio.FourGears
 begin
 
 section\<open>Code Export\<close>
 
 text\<open>Use the direct variant to implement resource normalisation\<close>
 lemmas [code_unfold] = normal_rewr_is_normal_dir
+
+text\<open>Ensure code for the Factorio example gets generated into a submodule\<close>
+code_identifier
+  code_module Location \<rightharpoonup> (Haskell) Factorio.Location
+  | code_module Item \<rightharpoonup> (Haskell) Factorio.Item
+  | code_module Machine \<rightharpoonup> (Haskell) Factorio.Machine
+  | code_module Manufacturing \<rightharpoonup> (Haskell) Factorio.Manufacturing
+  | code_module Electricity \<rightharpoonup> (Haskell) Factorio.Electricity
+  | code_module TestingPrelims \<rightharpoonup> (Haskell) Factorio.TestingPrelims
+  | code_module FourGears \<rightharpoonup> (Haskell) Factorio.FourGears
+  | code_module CraftWagon \<rightharpoonup> (Haskell) Factorio.CraftWagon
 
 text\<open>Export Haskell code\<close>
 export_code open
@@ -36,6 +49,13 @@ export_code open
   (* Process ports *)
   parallelPorts process_side.In process_side.Out
   "HOL.equal :: process_side \<Rightarrow> process_side \<Rightarrow> bool"
+  (* Factorio example *)
+  machineLabel machineSpeed machineDrain machineConsu
+  mblockMach mblockCount mblockIn mblockOut
+  itemLabel
+  flowItem flowRate flowLoc
+  merge unit split counit move perform
+  makeWagon fourGears electricity
   in Haskell file_prefix "haskell/isabelle/src" (root: ProcessComposition.Isabelle string_classes)
 
 end

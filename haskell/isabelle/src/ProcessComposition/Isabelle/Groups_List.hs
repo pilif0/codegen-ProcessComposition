@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.Product_Type(apsnd, map_prod) where {
+module ProcessComposition.Isabelle.Groups_List(sum_list) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -10,11 +10,13 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified ProcessComposition.Isabelle.List;
+import qualified ProcessComposition.Isabelle.Arith;
 
-apsnd :: forall a b c. (a -> b) -> (c, a) -> (c, b);
-apsnd f (x, y) = (x, f y);
-
-map_prod :: forall a b c d. (a -> b) -> (c -> d) -> (a, c) -> (b, d);
-map_prod f g (a, b) = (f a, g b);
+sum_list ::
+  forall a. (ProcessComposition.Isabelle.Arith.Monoid_add a) => [a] -> a;
+sum_list xs =
+  ProcessComposition.Isabelle.List.foldr ProcessComposition.Isabelle.Arith.plus
+    xs ProcessComposition.Isabelle.Arith.zero;
 
 }

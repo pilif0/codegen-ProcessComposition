@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.Product_Type(apsnd, map_prod) where {
+module ProcessComposition.Isabelle.GCD(gcd_int) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -10,11 +10,14 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified ProcessComposition.Isabelle.Arith;
 
-apsnd :: forall a b c. (a -> b) -> (c, a) -> (c, b);
-apsnd f (x, y) = (x, f y);
-
-map_prod :: forall a b c d. (a -> b) -> (c -> d) -> (a, c) -> (b, d);
-map_prod f g (a, b) = (f a, g b);
+gcd_int ::
+  ProcessComposition.Isabelle.Arith.Int ->
+    ProcessComposition.Isabelle.Arith.Int ->
+      ProcessComposition.Isabelle.Arith.Int;
+gcd_int (ProcessComposition.Isabelle.Arith.Int_of_integer x)
+  (ProcessComposition.Isabelle.Arith.Int_of_integer y) =
+  ProcessComposition.Isabelle.Arith.Int_of_integer (Prelude.gcd x y);
 
 }

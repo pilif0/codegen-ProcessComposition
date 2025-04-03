@@ -13,7 +13,9 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   error, id, return, not, fst, snd, map, filter, concat, concatMap, reverse,
   zip, null, takeWhile, dropWhile, all, any, Integer, negate, abs, divMod,
   String, Bool(True, False), Maybe(Nothing, Just));
+import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
+import qualified Data.Bits;
 
 data Res_term a b = Res a | Copyable b | Empty | Anything
   | Parallel [Res_term a b] | NonD (Res_term a b) (Res_term a b)

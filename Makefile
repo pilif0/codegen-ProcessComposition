@@ -29,10 +29,11 @@ dirs = -d isa-ProcessComposition -d theory
 opts = -o quick_and_dirty=true -o document=false
 .PHONY: exp
 exp: clean
-	mkdir -p haskell/isabelle/src
+	mkdir -p haskell/isabelle/src/ProcessComposition/Isabelle haskell/factorio/src/ProcessComposition/Isabelle
 	isabelle export $(dirs) $(opts) -x "*:code/**" -O . -p 2 ProcessComposition_Code
+	mv haskell/isabelle/src/ProcessComposition/Isabelle/Factorio haskell/factorio/src/ProcessComposition/Isabelle
 
 # Clean export destinations
 .PHONY: clean
 clean:
-	rm -rf haskell/isabelle/src/*
+	rm -rf haskell/isabelle/src/* haskell/factorio/src/*

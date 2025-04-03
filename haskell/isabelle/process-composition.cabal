@@ -23,19 +23,25 @@ source-repository head
 library
   exposed-modules:
       ProcessComposition.Isabelle.Arith
+      ProcessComposition.Isabelle.GCD
+      ProcessComposition.Isabelle.Groups_List
+      ProcessComposition.Isabelle.HOL
       ProcessComposition.Isabelle.List
       ProcessComposition.Isabelle.Option
+      ProcessComposition.Isabelle.Orderings
       ProcessComposition.Isabelle.Port
       ProcessComposition.Isabelle.Process
       ProcessComposition.Isabelle.ProcessPaths
       ProcessComposition.Isabelle.ProcessPort
       ProcessComposition.Isabelle.Product_Type
+      ProcessComposition.Isabelle.Rat
       ProcessComposition.Isabelle.ResNormalForm
       ProcessComposition.Isabelle.ResNormDirect
       ProcessComposition.Isabelle.ResNormRewrite
       ProcessComposition.Isabelle.Resource
       ProcessComposition.Isabelle.ResTerm
       ProcessComposition.Isabelle.Set
+      ProcessComposition.Isabelle.Sum_Type
   other-modules:
       Paths_process_composition
   autogen-modules:

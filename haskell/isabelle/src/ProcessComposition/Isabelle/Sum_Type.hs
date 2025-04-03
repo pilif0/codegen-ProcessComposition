@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.Product_Type(apsnd, map_prod) where {
+module ProcessComposition.Isabelle.Sum_Type(Sum(..)) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -11,10 +11,6 @@ import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
 
-apsnd :: forall a b c. (a -> b) -> (c, a) -> (c, b);
-apsnd f (x, y) = (x, f y);
-
-map_prod :: forall a b c d. (a -> b) -> (c -> d) -> (a, c) -> (b, d);
-map_prod f g (a, b) = (f a, g b);
+data Sum a b = Inl a | Inr b deriving (Prelude.Read, Prelude.Show);
 
 }
