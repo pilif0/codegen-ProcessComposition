@@ -2,5 +2,6 @@ session "ProcessComposition_Code" = "ProcessComposition" +
   sessions
     "HOL-Library"
     "ProcessComposition_Factorio"
+    "ProcessComposition_Marking"
   theories
     CodeExport

@@ -2,7 +2,7 @@
 
 module
   ProcessComposition.Isabelle.List(upt, foldl, foldr, member, remdups,
-                                    gen_length, size_list)
+                                    replicate, gen_length, size_list)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -38,6 +38,16 @@ member (x : xs) y = x == y || member xs y;
 remdups :: forall a. (Eq a) => [a] -> [a];
 remdups [] = [];
 remdups (x : xs) = (if member xs x then remdups xs else x : remdups xs);
+
+replicate :: forall a. ProcessComposition.Isabelle.Arith.Nat -> a -> [a];
+replicate n x =
+  (if ProcessComposition.Isabelle.Arith.equal_nat n
+        ProcessComposition.Isabelle.Arith.zero_nat
+    then []
+    else x : replicate
+               (ProcessComposition.Isabelle.Arith.minus_nat n
+                 ProcessComposition.Isabelle.Arith.one_nat)
+               x);
 
 gen_length ::
   forall a.

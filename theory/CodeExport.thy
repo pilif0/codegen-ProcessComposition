@@ -5,6 +5,7 @@ theory CodeExport
     "HOL-Library.Code_Target_Numeral"
     ProcessComposition_Factorio.CraftWagon
     ProcessComposition_Factorio.FourGears
+    ProcessComposition_Marking.MarkingRefined
 begin
 
 section\<open>Code Export\<close>
@@ -22,6 +23,11 @@ code_identifier
   | code_module TestingPrelims \<rightharpoonup> (Haskell) Factorio.TestingPrelims
   | code_module FourGears \<rightharpoonup> (Haskell) Factorio.FourGears
   | code_module CraftWagon \<rightharpoonup> (Haskell) Factorio.CraftWagon
+
+text\<open>Ensure code for the marking example gets generated into a submodule\<close>
+code_identifier
+  code_module MarkingAbstract \<rightharpoonup> (Haskell) Marking.Abstract
+  | code_module MarkingRefined \<rightharpoonup> (Haskell) Marking.Refined
 
 text\<open>Export Haskell code\<close>
 export_code open
@@ -58,6 +64,11 @@ export_code open
   "HOL.equal :: flow \<Rightarrow> flow \<Rightarrow> bool"
   merge unit split counit move perform
   makeWagon fourGears electricity
+  (* Marking example *)
+  refined.markingProcess
+  "HOL.equal :: abstract.lres \<Rightarrow> abstract.lres \<Rightarrow> bool"
+  "HOL.equal :: abstract.cres \<Rightarrow> abstract.cres \<Rightarrow> bool"
+  "HOL.equal :: ('a :: equal) refined.lres \<Rightarrow> 'a refined.lres \<Rightarrow> bool"
   in Haskell file_prefix "haskell/isabelle/src" (root: ProcessComposition.Isabelle string_classes)
 
 end

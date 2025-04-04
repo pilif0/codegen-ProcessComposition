@@ -1,0 +1,13 @@
+name: process-composition-marking
+version: 0.1.0.0
+synopsis: Example mechanisation of marking a course work assignment using linear resources and process compositions
+github: pilif0/codegen-ProcessComposition/haskell
+license: BSD-3-Clause
+author: Filip Smola
+category: Library, Formal Methods
+
+library:
+  source-dirs: src
+  dependencies:
+    - process-composition >= 0.1 && < 1
+    - base >= 4.7 && < 5
