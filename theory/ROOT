@@ -3,5 +3,6 @@ session "ProcessComposition_Code" = "ProcessComposition" +
     "HOL-Library"
     "ProcessComposition_Factorio"
     "ProcessComposition_Marking"
+    "ProcessComposition_PortGraph"
   theories
     CodeExport

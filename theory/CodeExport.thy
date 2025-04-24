@@ -1,7 +1,7 @@
 theory CodeExport
   imports
     ProcessComposition.Process
-    ProcessComposition.ProcessPort
+    ProcessComposition_PortGraph.ProcessPGPrint
     "HOL-Library.Code_Target_Numeral"
     ProcessComposition_Factorio.CraftWagon
     ProcessComposition_Factorio.FourGears
@@ -55,6 +55,9 @@ export_code open
   (* Process ports *)
   parallelPorts process_side.In process_side.Out
   "HOL.equal :: process_side \<Rightarrow> process_side \<Rightarrow> bool"
+  (* Process port graphs *)
+  "HOL.equal :: ('s, 'a, 'p, 'l) port_graph \<Rightarrow> ('s, 'a, 'p, 'l) port_graph \<Rightarrow> bool"
+  pgConstruct processToELK
   (* Factorio example *)
   machineLabel machineSpeed machineDrain machineConsu
   mblockMach mblockCount mblockIn mblockOut
