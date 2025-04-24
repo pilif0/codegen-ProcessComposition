@@ -40,4 +40,4 @@ exp: clean
 # Clean export destinations
 .PHONY: clean
 clean:
-	rm -rf haskell/isabelle/src/* haskell/factorio/src/*
+	rm -rf haskell/isabelle/src/* haskell/factorio/src/* haskell/marking/src/*
