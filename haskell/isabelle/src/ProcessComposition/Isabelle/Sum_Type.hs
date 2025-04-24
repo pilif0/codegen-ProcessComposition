@@ -10,6 +10,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 
 data Sum a b = Inl a | Inr b deriving (Prelude.Read, Prelude.Show);
 

@@ -16,6 +16,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 
 data Res_term a b = Res a | Copyable b | Empty | Anything
   | Parallel [Res_term a b] | NonD (Res_term a b) (Res_term a b)

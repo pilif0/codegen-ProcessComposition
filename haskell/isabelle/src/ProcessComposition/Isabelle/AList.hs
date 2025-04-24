@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.HOL() where {
+module ProcessComposition.Isabelle.AList(update) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -11,5 +11,9 @@ import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
 import qualified Str_Literal;
+
+update :: forall a b. (Eq a) => a -> b -> [(a, b)] -> [(a, b)];
+update k v [] = [(k, v)];
+update k v (p : ps) = (if fst p == k then (k, v) : ps else p : update k v ps);
 
 }

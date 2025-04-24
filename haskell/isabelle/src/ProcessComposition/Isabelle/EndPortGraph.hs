@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.Groups_List(sum_list) where {
+module ProcessComposition.Isabelle.EndPortGraph(endPortGraph) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -11,13 +11,18 @@ import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
 import qualified Str_Literal;
-import qualified ProcessComposition.Isabelle.List;
+import qualified ProcessComposition.Isabelle.PortGraph;
 import qualified ProcessComposition.Isabelle.Arith;
+import qualified ProcessComposition.Isabelle.Port;
 
-sum_list ::
-  forall a. (ProcessComposition.Isabelle.Arith.Monoid_add a) => [a] -> a;
-sum_list xs =
-  ProcessComposition.Isabelle.List.foldr ProcessComposition.Isabelle.Arith.plus
-    xs ProcessComposition.Isabelle.Arith.zero;
+endPortGraph ::
+  forall a b c d.
+    (ProcessComposition.Isabelle.Port.Side_in_out b) => [a] ->
+                  ProcessComposition.Isabelle.PortGraph.Port_graph b a c d;
+endPortGraph a =
+  ProcessComposition.Isabelle.PortGraph.PGraph [] []
+    (ProcessComposition.Isabelle.Port.listPorts
+      ProcessComposition.Isabelle.Arith.zero_nat
+      ProcessComposition.Isabelle.Port.ina a);
 
 }

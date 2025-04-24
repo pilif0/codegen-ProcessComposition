@@ -10,6 +10,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 
 apsnd :: forall a b c. (a -> b) -> (c, a) -> (c, b);
 apsnd f (x, y) = (x, f y);

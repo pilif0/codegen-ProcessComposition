@@ -10,6 +10,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 
 class Ord a where {
   less_eq :: a -> a -> Bool;

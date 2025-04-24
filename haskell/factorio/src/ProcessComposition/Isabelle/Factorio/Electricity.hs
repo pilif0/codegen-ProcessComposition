@@ -13,6 +13,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 import qualified ProcessComposition.Isabelle.Groups_List;
 import qualified ProcessComposition.Isabelle.ResTerm;
 import qualified ProcessComposition.Isabelle.Resource;

@@ -4,19 +4,20 @@ module
   ProcessComposition.Isabelle.Arith(Int(..), integer_of_int, equal_int, Nat(..),
                                      integer_of_nat, plus_nat, Plus(..),
                                      zero_nat, Zero(..), Semigroup_add(..),
-                                     Monoid_add(..), One(..), Numeral(..),
+                                     Monoid_add(..), Num(..), one_integer,
+                                     One(..), Zero_neq_one(..), Numeral(..),
                                      Times(..), Power(..), Semigroup_mult(..),
                                      Ab_semigroup_add(..), Semiring(..),
                                      Mult_zero(..), Comm_monoid_add(..),
                                      Semiring_0(..), Monoid_mult(..),
-                                     Semiring_numeral(..), Zero_neq_one(..),
-                                     Semiring_1(..), Num(..), one_nat, suc,
-                                     minus_nat, equal_nat, power, one_int,
-                                     less_int, less_nat, numeral,
-                                     nat_of_integer, divmod_nat, plus_int,
-                                     zero_int, divmod_integer, of_nat,
-                                     times_int, times_nat, uminus_int,
-                                     divide_integer, divide_int)
+                                     Semiring_numeral(..), Semiring_1(..),
+                                     one_nat, suc, minus_nat, equal_nat, power,
+                                     one_int, less_int, less_nat, numeral,
+                                     int_of_nat, nat_of_integer, divmod_nat,
+                                     plus_int, zero_int, divmod_integer, of_nat,
+                                     times_int, times_nat, uminus_int, of_bool,
+                                     divide_integer, divide_int, divide_nat,
+                                     modulo_integer, modulo_nat)
   where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
@@ -27,6 +28,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 import qualified ProcessComposition.Isabelle.Product_Type;
 import qualified ProcessComposition.Isabelle.HOL;
 import qualified ProcessComposition.Isabelle.Orderings;
@@ -82,13 +84,32 @@ instance Semigroup_add Nat where {
 instance Monoid_add Nat where {
 };
 
+data Num = One | Bit0 Num | Bit1 Num deriving (Prelude.Read, Prelude.Show);
+
+one_integer :: Integer;
+one_integer = (1 :: Integer);
+
+class One a where {
+  one :: a;
+};
+
+instance One Integer where {
+  one = one_integer;
+};
+
+instance Zero Integer where {
+  zero = (0 :: Integer);
+};
+
 instance ProcessComposition.Isabelle.Orderings.Ord Integer where {
   less_eq = (\ a b -> a <= b);
   less = (\ a b -> a < b);
 };
 
-class One a where {
-  one :: a;
+class (One a, Zero a) => Zero_neq_one a where {
+};
+
+instance Zero_neq_one Integer where {
 };
 
 class (One a, Semigroup_add a) => Numeral a where {
@@ -125,13 +146,8 @@ class (Semigroup_mult a, Power a) => Monoid_mult a where {
 class (Monoid_mult a, Numeral a, Semiring a) => Semiring_numeral a where {
 };
 
-class (One a, Zero a) => Zero_neq_one a where {
-};
-
 class (Semiring_numeral a, Semiring_0 a, Zero_neq_one a) => Semiring_1 a where {
 };
-
-data Num = One | Bit0 Num | Bit1 Num deriving (Prelude.Read, Prelude.Show);
 
 one_nat :: Nat;
 one_nat = Nat (1 :: Integer);
@@ -169,6 +185,9 @@ numeral (Bit0 n) = let {
                      m = numeral n;
                    } in plus m m;
 numeral One = one;
+
+int_of_nat :: Nat -> Int;
+int_of_nat n = Int_of_integer (integer_of_nat n);
 
 nat_of_integer :: Integer -> Nat;
 nat_of_integer k =
@@ -231,11 +250,24 @@ times_nat m n = Nat (integer_of_nat m * integer_of_nat n);
 uminus_int :: Int -> Int;
 uminus_int k = Int_of_integer (negate (integer_of_int k));
 
+of_bool :: forall a. (Zero_neq_one a) => Bool -> a;
+of_bool True = one;
+of_bool False = zero;
+
 divide_integer :: Integer -> Integer -> Integer;
 divide_integer k l = fst (divmod_integer k l);
 
 divide_int :: Int -> Int -> Int;
 divide_int k l =
   Int_of_integer (divide_integer (integer_of_int k) (integer_of_int l));
+
+divide_nat :: Nat -> Nat -> Nat;
+divide_nat m n = Nat (divide_integer (integer_of_nat m) (integer_of_nat n));
+
+modulo_integer :: Integer -> Integer -> Integer;
+modulo_integer k l = snd (divmod_integer k l);
+
+modulo_nat :: Nat -> Nat -> Nat;
+modulo_nat m n = Nat (modulo_integer (integer_of_nat m) (integer_of_nat n));
 
 }

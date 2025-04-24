@@ -14,6 +14,7 @@ import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
 import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
+import qualified Str_Literal;
 import qualified ProcessComposition.Isabelle.Product_Type;
 import qualified ProcessComposition.Isabelle.GCD;
 import qualified ProcessComposition.Isabelle.HOL;

@@ -1,6 +1,6 @@
 {-# LANGUAGE EmptyDataDecls, RankNTypes, ScopedTypeVariables #-}
 
-module ProcessComposition.Isabelle.HOL() where {
+module ProcessComposition.Isabelle.Nano_JSON(Json(..)) where {
 
 import Prelude ((==), (/=), (<), (<=), (>=), (>), (+), (-), (*), (/), (**),
   (>>=), (>>), (=<<), (&&), (||), (^), (^^), (.), ($), ($!), (++), (!!), Eq,
@@ -11,5 +11,8 @@ import Data.Bits ((.&.), (.|.), (.^.));
 import qualified Prelude;
 import qualified Data.Bits;
 import qualified Str_Literal;
+
+data Json a b = OBJECT [(a, Json a b)] | ARRAY [Json a b] | NUMBER b | STRING a
+  | BOOL Bool | NULL deriving (Prelude.Read, Prelude.Show);
 
 }
